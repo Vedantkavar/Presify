@@ -138,20 +138,12 @@ def identify_sections(text):
         if len(potential_sections) < 3:
             # Create generic section titles
             generic_titles = [
-                "Title Slide",
                 "Introduction & Background",
-                "Research Objectives",
-                "Literature Review & Theoretical Framework",
-                "Research Methodology",
-                "Key Findings & Results",
-                "Data Analysis & Insights",
-                "Discussion & Implications",
-                "Conclusions & Recommendations",
-                "Future Directions",
-                "References & Acknowledgments",
-                "Q&A"
+                "Key Concepts",
+                "Main Findings",
+                "Analysis & Insights",
+                "Conclusions & Recommendations"
             ]
-
             
             if FALLBACK_MODE:
                 return generic_titles[:5]
@@ -277,7 +269,7 @@ def create_presentation(pdf_title, sections, section_contents):
         
         # Set title and subtitle
         title_shape.text = pdf_title.upper()
-        subtitle_shape.text = "PDF SUMMARY\nPowered by AI"
+        # subtitle_shape.text = "PDF SUMMARY"
         
         # Format title slide
         title_shape.text_frame.paragraphs[0].font.size = Pt(44)
@@ -290,7 +282,7 @@ def create_presentation(pdf_title, sections, section_contents):
         # Add tagline similar to "Protecting Our Digital World"
         tf = subtitle_shape.text_frame
         p = tf.add_paragraph()
-        p.text = "\nExtracting Knowledge From Documents"
+        # p.text = "\nExtracting Knowledge From Documents"
         p.font.size = Pt(16)
         p.font.color.rgb = owasp_colors['subtitle']
         
@@ -406,237 +398,15 @@ def get_download_link(pptx_content, filename):
         return None
 
 # Custom CSS for better appearance - OWASP-inspired styling
-st.markdown("""
-<style>
-.main {
-  padding: 2.5rem;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  min-height: 100vh;
-}
+def load_css():
+    with open("style.css", "r") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-.stButton button {
-  background: linear-gradient(135deg, #12103f, #1a1758);
-  color: #7de6bc;
-  padding: 14px 28px;
-  border-radius: 12px;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.stButton button:hover {
-  background: linear-gradient(135deg, #1a1758, #12103f);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-}
-
-.stButton button:active {
-  transform: translateY(1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.stButton button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: translateX(-100%);
-  transition: 0.5s;
-}
-
-.stButton button:hover::after {
-  transform: translateX(100%);
-}
-
-h1 {
-  color: rgb(255, 255, 255);
-  margin-bottom: 2.5rem;
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to right, #ffffff, #7de6bc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.download-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #12103f, #1a1758);
-  color: #7de6bc !important;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 12px;
-  font-weight: 600;
-  margin-top: 24px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.download-button:hover {
-  background: linear-gradient(135deg, #1a1758, #12103f);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-}
-
-.download-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.download-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, rgba(125, 230, 188, 0.1), rgba(125, 230, 188, 0));
-  z-index: -1;
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform 0.5s ease-out;
-}
-
-.download-button:hover::before {
-  transform: scaleX(1);
-}
-
-.stSuccess {
-  background: rgba(18, 16, 63, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 16px;
-  border-left: 5px solid #7de6bc;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  transition: all 0.3s ease;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  animation: slideIn 0.5s ease-out;
-}
-
-.stWarning {
-  background: rgba(18, 16, 63, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 16px;
-  border-left: 5px solid #fc816e;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  transition: all 0.3s ease;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  animation: slideIn 0.5s ease-out;
-}
-
-.stError {
-  background: rgba(18, 16, 63, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 16px;
-  border-left: 5px solid #ff5555;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  transition: all 0.3s ease;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  animation: slideIn 0.5s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.debug-info {
-  background: rgba(248, 249, 250, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 16px;
-  border-radius: 12px;
-  margin-top: 24px;
-  font-family: "JetBrains Mono", "Fira Code", monospace;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #e0e0e0;
-  transition: all 0.3s ease;
-}
-
-.debug-info:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-/* Additional aesthetic enhancements */
-::selection {
-  background: rgba(125, 230, 188, 0.3);
-  color: white;
-}
-
-body {
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  color: #f0f0f0;
-  line-height: 1.6;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(18, 16, 63, 0.2);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(125, 230, 188, 0.5);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(125, 230, 188, 0.7);
-}
-
-
-</style>
-""", unsafe_allow_html=True)
+load_css()
 
 def main():
-    st.title("Enhanced PDF to PowerPoint Converter")
-    st.markdown("Upload a PDF file to generate a professional PowerPoint presentation with intelligent content extraction and OWASP-inspired design.")
-
+    st.title("PDF to PowerPoint Converter")
+    st.markdown("Upload a PDF file to generate a PowerPoint presentation.")
     
     uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
     
@@ -648,12 +418,12 @@ def main():
             "Filename": uploaded_file.name,
             "File size": f"{uploaded_file.size / 1024:.2f} KB"
         }
-        st.write("📄 File Details:")
+        st.write("File Details:")
         for key, value in file_details.items():
             st.write(f"- {key}: {value}")
         
         # Generate PPT button
-        if st.button("Generate Professional PowerPoint"):
+        if st.button("Generate PowerPoint"):
             progress_bar = st.progress(0)
             status_text = st.empty()
             
@@ -667,6 +437,7 @@ def main():
                 if not pdf_text.strip():
                     st.error("Could not extract text from the PDF. The file may be scanned or protected.")
                     return
+                
                 
                 # Preprocess the text
                 status_text.text("Step 2/5: Preprocessing text...")
@@ -682,6 +453,7 @@ def main():
                 status_text.text("Step 4/5: Identifying document sections...")
                 progress_bar.progress(60)
                 sections = identify_sections(processed_text)
+                
                 
                 # Extract key points for each section
                 status_text.text("Step 4/5: Extracting key points...")
@@ -708,14 +480,14 @@ def main():
                     # Create download link
                     download_link = get_download_link(
                         pptx_io.getvalue(), 
-                        f"{uploaded_file.name.split('.')[0]}_presentation.pptx"
+                        f"{uploaded_file.name.split('.')[0]}.pptx"
                     )
                     
                     if download_link:
                         st.markdown(download_link, unsafe_allow_html=True)
                         progress_bar.progress(100)
                         status_text.text("Complete!")
-                        st.success("✨ PowerPoint presentation generated successfully! Click the button below to download.")
+                        st.success("Presentation generated successfully! Click the button below to download.")
                     else:
                         st.error("Failed to create download link.")
                         
@@ -723,7 +495,7 @@ def main():
                     st.error(f"Error saving presentation: {str(e)}")
                 
                 # Show preview info
-                with st.expander("📋 Presentation Content Preview"):
+                with st.expander("Presentation Preview"):
                     st.markdown(f"### Title: {pdf_title}")
                     st.markdown("### Sections:")
                     for i, (section, points) in enumerate(zip(sections, section_contents)):

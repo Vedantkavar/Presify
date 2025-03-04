@@ -1,0 +1,72 @@
+.main {
+  padding: 2rem;
+}
+
+h1 {
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.stButton button {
+  background-color: #12103f;
+  color: #7de6bc;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.stButton button:hover {
+  background-color: #1a1758;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+.download-button {
+  display: inline-block;
+  background-color: #12103f;
+  color: #7de6bc !important;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.download-button:hover {
+  background-color: #1a1758;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+.stSuccess {
+  background-color: rgba(125, 230, 188, 0.2);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 5px solid #7de6bc;
+}
+.stWarning {
+  background-color: rgba(252, 129, 110, 0.2);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 5px solid #fc816e;
+}
+.stError {
+  background-color: rgba(255, 85, 85, 0.2);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 5px solid #ff5555;
+}
+.debug-info {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-family: monospace;
+}
