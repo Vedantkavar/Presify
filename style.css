@@ -1,22 +1,26 @@
 .main {
   padding: 2rem;
+  display: flex;
 }
 
 h1 {
-  color: #ff0000;
+  color: #ffffff;
   margin-bottom: 2rem;
   font-size: 2.5rem;
   font-weight: 700;
 }
 
 .stButton button {
+  display: inline-block;
   background-color: #12103f;
-  color: #7de6bc;
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
+  color: #7de6bc !important;
+  padding: 14px 28px;
+  text-align: center;
+  text-decoration: none;
   font-size: 18px;
+  border-radius: 8px;
   font-weight: bold;
+  margin-top: 20px;
   transition: all 0.3s;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }

@@ -15,7 +15,6 @@ import PyPDF2
 import io
 import re
 import nltk
-import sys
 import traceback
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -405,7 +404,7 @@ def load_css():
 load_css()
 
 def main():
-    st.title("PDF to PowerPoint Converter")
+    st.title("PDF to PowerPoint Converter - Beta version")
     st.markdown("Upload a PDF file to generate a PowerPoint presentation.")
     
     uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
