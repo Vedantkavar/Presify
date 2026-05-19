@@ -1,76 +1,112 @@
-.main {
-  padding: 2rem;
-  display: flex;
+/* Presify - Streamlit theme */
+:root {
+  --bg: #10102e;
+  --panel: #1a1a4a;
+  --primary: #7de6bc;   /* mint */
+  --accent: #fc816e;    /* coral */
+  --text: #ffffff;
+  --muted: #b8b8d4;
 }
 
-h1 {
-  color: #ffffff;
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
+html, body, [data-testid="stAppViewContainer"] {
+  background-color: var(--bg) !important;
+  color: var(--text);
+}
+
+[data-testid="stSidebar"] {
+  background-color: var(--panel) !important;
+}
+[data-testid="stSidebar"] * {
+  color: var(--text) !important;
+}
+
+.main { padding: 2rem; }
+
+h1, h2, h3, h4 {
+  color: var(--primary);
+  letter-spacing: 0.5px;
   font-weight: 700;
 }
+h1 { font-size: 2.5rem; margin-bottom: 0.25rem; }
 
+p, span, label, div { color: var(--text); }
+
+/* Streamlit buttons */
 .stButton button {
-  display: inline-block;
-  background-color: #12103f;
-  color: #7de6bc !important;
-  padding: 14px 28px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: all 0.4s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, var(--accent), #ff9f8a);
+  color: #12103f !important;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 6px 18px rgba(252, 129, 110, 0.25);
 }
 .stButton button:hover {
-  background-color: #1a1758;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
   transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 22px rgba(252, 129, 110, 0.35);
 }
 
+/* Custom download anchor */
 .download-button {
   display: inline-block;
-  background-color: #12103f;
-  color: #7de6bc !important;
+  background: linear-gradient(135deg, var(--primary), #a7f0d4);
+  color: #0b0b25 !important;
   padding: 14px 28px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: all 0.4s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none !important;
+  margin-top: 16px;
+  box-shadow: 0 6px 18px rgba(125, 230, 188, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 .download-button:hover {
-  background-color: #1a1758;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
   transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 22px rgba(125, 230, 188, 0.4);
 }
-.stSuccess {
-  background-color: rgba(125, 230, 188, 0.2);
-  padding: 16px;
-  border-radius: 8px;
-  border-left: 5px solid #7de6bc;
+
+/* File uploader */
+[data-testid="stFileUploaderDropzone"] {
+  background-color: var(--panel) !important;
+  border: 2px dashed rgba(125, 230, 188, 0.5) !important;
+  border-radius: 12px !important;
+}
+
+/* Alerts */
+.stSuccess, [data-testid="stNotification"] {
+  background-color: rgba(125, 230, 188, 0.15) !important;
+  border-left: 5px solid var(--primary) !important;
+  border-radius: 8px !important;
 }
 .stWarning {
-  background-color: rgba(252, 129, 110, 0.2);
-  padding: 16px;
-  border-radius: 8px;
-  border-left: 5px solid #fc816e;
+  background-color: rgba(252, 129, 110, 0.15) !important;
+  border-left: 5px solid var(--accent) !important;
+  border-radius: 8px !important;
 }
 .stError {
-  background-color: rgba(255, 85, 85, 0.2);
-  padding: 16px;
-  border-radius: 8px;
-  border-left: 5px solid #ff5555;
+  background-color: rgba(255, 85, 85, 0.15) !important;
+  border-left: 5px solid #ff5555 !important;
+  border-radius: 8px !important;
 }
-.debug-info {
-  background-color: #f8f9fa;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 20px;
-  font-family: monospace;
+.stInfo {
+  background-color: rgba(110, 198, 255, 0.12) !important;
+  border-left: 5px solid #6ec6ff !important;
+  border-radius: 8px !important;
+}
+
+/* Progress bar */
+[data-testid="stProgressBar"] > div > div > div > div {
+  background: linear-gradient(90deg, var(--accent), var(--primary)) !important;
+}
+
+/* Expander */
+[data-testid="stExpander"] {
+  background-color: var(--panel) !important;
+  border: 1px solid rgba(125, 230, 188, 0.2) !important;
+  border-radius: 10px !important;
 }
